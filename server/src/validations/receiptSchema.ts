@@ -1,6 +1,7 @@
 import * as z from 'zod';
-import { PaymentMethod } from '../../generated/prisma';
+
 import { PaginationQuerySchema } from './paginationSchema';
+import { PaymentMethod } from '../../generated/prisma/enums';
 
 export const GetReceiptParamSchema = z.object({
   id: z.uuid({ version: 'v4' }),

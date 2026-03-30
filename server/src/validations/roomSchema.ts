@@ -1,6 +1,6 @@
 import z from 'zod';
-import { RoomStatus } from '../../generated/prisma';
 import { PaginationQuerySchema } from './paginationSchema';
+import { RoomStatus } from '../../generated/prisma/enums';
 
 //Add Room ID Schema (for param validation)
 export const RoomIdSchema = z.object({

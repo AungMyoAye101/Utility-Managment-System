@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { RelationshipToTenant } from '../../generated/prisma';
+import { RelationshipToTenant } from '../../generated/prisma/enums';
 
 export const OccupantBaseSchema = z
   .object({

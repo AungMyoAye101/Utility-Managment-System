@@ -1,5 +1,7 @@
 import * as z from 'zod';
-import { ServiceStatus } from '../../generated/prisma';
+import { ServiceStatus } from '../../generated/prisma/enums';
+
+
 
 export const GetTotalRevenueByMonthSchema = z.object({
   month: z

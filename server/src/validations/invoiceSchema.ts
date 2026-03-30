@@ -1,7 +1,8 @@
 import * as z from 'zod';
 
 import { PaginationQuerySchema } from './paginationSchema';
-import { InvoiceStatus } from '../../generated/prisma';
+import { InvoiceStatus } from '../../generated/prisma/enums';
+
 
 export const GetTenantInvoiceParamSchema = z.object({
   tenantId: z.uuid({ version: 'v4' }),

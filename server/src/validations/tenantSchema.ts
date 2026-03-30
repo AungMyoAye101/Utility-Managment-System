@@ -1,6 +1,6 @@
 import * as z from 'zod';
-import { RelationshipToTenant } from '../../generated/prisma';
 import { PaginationQuerySchema } from './paginationSchema';
+import { RelationshipToTenant } from '../../generated/prisma/enums';
 
 export const OccupantSchema = z.object({
   name: z.string().min(1, 'Occupant name is required'),
