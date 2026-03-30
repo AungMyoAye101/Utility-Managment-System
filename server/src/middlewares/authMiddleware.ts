@@ -8,7 +8,6 @@ export function isAuthenticated(
   _res: Response,
   next: NextFunction
 ) {
-
   const token = req.headers.authorization?.split(' ')[1]; // Bearer TOKEN
   if (!token) {
     throw new UnauthorizedError('Access token is required');
@@ -25,7 +24,7 @@ export function isAuthenticated(
 
 export function hasRole(allowedRoles: UserRole[]) {
   return (req: Request, _res: Response, next: NextFunction) => {
-    console.log(req.user?.role)
+    console.log(req.user?.role);
     if (!req.user?.role || !allowedRoles.includes(req.user.role)) {
       throw new ForbiddenError(`Required roles: ${allowedRoles.join(', ')}`);
     }

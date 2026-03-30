@@ -5,7 +5,7 @@ export const deployedUrls = [
 
 export const allowedOrigins = [
   'https://utility-management-system-dashboard.vercel.app',
-  'https://tenant-web-app-omega.vercel.app',
+  'https://tenant-web-app-ums.vercel.app',
   'http://localhost:3000',
   'http://localhost:3030',
   'http://localhost:8000',

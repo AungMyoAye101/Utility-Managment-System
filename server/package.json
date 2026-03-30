@@ -2,10 +2,10 @@
   "name": "node-utility-management-system",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "scripts": {
-    "build": "tsup src/index.ts --format esm --clean",
-    "start": "node dist/index.js",
+    "build": "tsup",
+    "start": "node dist/index.cjs",
     "dev": "tsx watch --env-file=.env ./src/index.ts",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",

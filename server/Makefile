@@ -187,7 +187,7 @@ debug: ## Start application in debug mode
 	NODE_ENV=development DEBUG=* npm run dev
 
 inspect: ## Start with Node.js inspector
-	node --inspect dist/index.js
+	node --inspect dist/index.cjs
 
 # =============================================================================
 # BACKUP & RESTORE
