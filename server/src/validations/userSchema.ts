@@ -1,6 +1,6 @@
 import * as z from 'zod';
-import { UserRole } from '../../generated/prisma';
 import { PaginationQuerySchema } from './paginationSchema';
+import { UserRole } from '../../generated/prisma/enums';
 
 export const GetUserParamSchema = z.object({
   userId: z.uuid({ version: 'v4' }),
