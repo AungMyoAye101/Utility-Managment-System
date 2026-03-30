@@ -1,0 +1,14 @@
+model TotalUnits {
+  id               String   @id @default(uuid())
+  electricityUnits Decimal
+  waterUnits       Decimal
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // relations
+  bill   Bill   @relation(fields: [billId], references: [id])
+  billId String @unique
+
+  @@index([billId])
+  @@map("total_units")
+}

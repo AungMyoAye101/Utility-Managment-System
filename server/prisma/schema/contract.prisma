@@ -1,0 +1,35 @@
+model Contract {
+  id          String    @id @default(uuid())
+  expiryDate  DateTime
+  createdDate DateTime
+  updatedDate DateTime?
+
+  // relations
+  roomId         String       @unique
+  room           Room         @relation(fields: [roomId], references: [id])
+  tenantId       String       @unique
+  tenant         Tenant       @relation(fields: [tenantId], references: [id])
+  contractTypeId String
+  contractType   ContractType @relation(fields: [contractTypeId], references: [id])
+
+  @@index([tenantId])
+  @@index([roomId])
+  @@index([expiryDate])
+  @@index([tenantId, expiryDate])
+  @@map("contracts")
+}
+
+model ContractType {
+  id         String   @id @default(uuid())
+  name       String // 6 months, 12 months
+  duration   Int
+  price      Decimal
+  facilities String[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  contract Contract[]
+
+  @@index([name])
+  @@map("contract_types")
+}

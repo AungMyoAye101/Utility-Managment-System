@@ -1,0 +1,26 @@
+enum RelationshipToTenant {
+  SPOUSE
+  PARENT
+  CHILD
+  SIBLING
+  RELATIVE
+  FRIEND
+  OTHER
+}
+
+model Occupant {
+  id                   String               @id @default(uuid())
+  name                 String
+  nrc                  String?
+  relationshipToTenant RelationshipToTenant
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+
+  // relations
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId String
+
+  @@index([tenantId])
+  @@index([tenantId, relationshipToTenant])
+  @@map("occupants")
+}

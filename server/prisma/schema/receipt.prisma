@@ -1,0 +1,20 @@
+enum PaymentMethod {
+  Cash
+  Mobile_Banking
+}
+
+model Receipt {
+    id            String        @id @default(uuid())
+    paymentMethod PaymentMethod @default(Cash)
+    paidDate      DateTime?
+    createdAt     DateTime      @default(now())
+    updatedAt     DateTime      @updatedAt
+
+    //relations
+    invoice   Invoice @relation(fields: [invoiceId], references: [id])
+    invoiceId String  @unique
+
+    @@index([invoiceId])
+    @@index([paidDate])
+    @@map("receipts")
+}

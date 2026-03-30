@@ -1,0 +1,26 @@
+enum UserRole {
+  Tenant
+  Admin
+  Staff
+}
+
+model User {
+  id           String   @id @default(uuid())
+  userName     String
+  email        String   @unique
+  password     String
+  role         UserRole
+  refreshToken String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // relations
+  tenant   Tenant? @relation(fields: [tenantId], references: [id])
+  tenantId String? @unique
+
+  @@index([email])
+  @@index([role, isActive])
+  @@index([tenantId])
+  @@map("users")
+}

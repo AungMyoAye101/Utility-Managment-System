@@ -1,0 +1,130 @@
+import { NextFunction, Request, Response } from 'express';
+import { successResponse } from '../common/apiResponse';
+import {
+  createInvoiceService,
+  getAllInvoicesService,
+  getInvoiceService,
+  getTenantInvoiceLatestService,
+  getTenantInvoiceHistoryService,
+  updateInvoiceService,
+} from '../services/invoiceService';
+import { NotFoundError } from '../common/errors';
+
+export async function createInvoiceController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const newInvoice = await createInvoiceService(req.validatedBody);
+
+    successResponse(
+      res,
+      'Invoice created successfully',
+      { data: newInvoice },
+      201
+    );
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getAllInvoicesController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const result = await getAllInvoicesService(req);
+    if (!result.data.length) {
+      return next(new NotFoundError('No found invoice.'));
+    }
+    successResponse(res, 'Invoices fetched successfully', result);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function updateInvoiceController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const updatedInvoice = await updateInvoiceService(
+      req.validatedParams,
+      req.validatedBody
+    );
+
+    successResponse(
+      res,
+      'Invoice updated successfully',
+      { data: updatedInvoice },
+      200
+    );
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getInvoiceController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const invoiceId = req.validatedParams;
+    const fetchedInvoice = await getInvoiceService(invoiceId);
+    if (fetchedInvoice === null) {
+      return next(new NotFoundError('No found invoice.'));
+    }
+    successResponse(
+      res,
+      'Invoice by id fetched successfully.',
+      {
+        data: fetchedInvoice,
+      },
+      200
+    );
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function getTenantInvoiceLatestController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const tenantId = req.validatedParams;
+    const result = await getTenantInvoiceLatestService(tenantId);
+    if (!result)
+      return next(new NotFoundError('No latest invoice by tenant id'));
+
+    successResponse(
+      res,
+      'Latest invoice by tenant id fetched successfully.',
+      {
+        data: result,
+      },
+      200
+    );
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function getTenantInvoiceHistoryController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const result = await getTenantInvoiceHistoryService(req);
+
+    successResponse(res, 'Invoice fetched successfully.', result, 200);
+  } catch (error) {
+    return next(error);
+  }
+}

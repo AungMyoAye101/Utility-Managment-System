@@ -1,0 +1,37 @@
+enum PriorityLevel {
+  Low
+  Medium
+  High
+}
+
+enum Category {
+  Complain
+  Maintenance
+  Other
+}
+
+enum ServiceStatus {
+  Pending
+  Ongoing
+  Resolved
+}
+
+model CustomerService {
+  id            String        @id @default(uuid())
+  description   String
+  category      Category
+  status        ServiceStatus
+  priorityLevel PriorityLevel
+  issuedDate    DateTime      @default(now())
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  room   Room   @relation(fields: [roomId], references: [id])
+  roomId String
+
+  @@index([roomId])
+  @@index([status, priorityLevel])
+  @@index([category, status])
+  @@index([createdAt])
+  @@map("customer_services")
+}

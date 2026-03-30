@@ -1,0 +1,24 @@
+model Tenant {
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  nrc         String
+  phoneNo     String
+  emergencyNo String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // relations
+  roomId    String     @unique
+  room      Room       @relation(fields: [roomId], references: [id])
+  occupants Occupant[]
+  user      User?
+  contract  Contract?
+
+  @@index([email])
+  @@index([nrc])
+  @@index([phoneNo])
+  @@index([roomId])
+  @@index([name, email])
+  @@map("tenants")
+}

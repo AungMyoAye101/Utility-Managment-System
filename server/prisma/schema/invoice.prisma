@@ -1,0 +1,25 @@
+enum InvoiceStatus {
+  Overdue
+  Paid
+  Pending
+}
+
+model Invoice {
+  id          String        @id @default(uuid())
+  invoiceNo   String        @unique
+  status      InvoiceStatus
+  receiptSent Boolean       @default(false)
+
+  // relations
+  bill      Bill     @relation(fields: [billId], references: [id])
+  billId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  receipt Receipt?
+
+  @@index([billId])
+  @@index([status, createdAt])
+  @@index([status, receiptSent])
+  @@map("invoices")
+}

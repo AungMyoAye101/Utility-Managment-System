@@ -1,0 +1,26 @@
+model Bill {
+  id             String   @id @default(uuid())
+  rentalFee      Decimal
+  electricityFee Decimal
+  waterFee       Decimal
+  fineFee        Decimal?
+  serviceFee     Decimal?
+  groundFee      Decimal
+  carParkingFee  Decimal?
+  wifiFee        Decimal?
+  totalAmount    Decimal
+  dueDate        DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  //relations
+  room      Room        @relation(fields: [roomId], references: [id])
+  roomId    String
+  totalUnit TotalUnits?
+  invoice   Invoice?
+
+  @@index([roomId])
+  @@index([dueDate])
+  @@index([roomId, dueDate])
+  @@map("bills")
+}

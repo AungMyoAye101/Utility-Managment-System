@@ -1,0 +1,92 @@
+import { NextFunction, Request, Response } from 'express';
+import {
+  getAllUsersService,
+  getUserService,
+  createUserService,
+  updateUserService,
+  deleteUserService,
+} from '../services/userService';
+import { NotFoundError } from '../common/errors';
+import { successResponse } from '../common/apiResponse';
+
+export async function getAllUsersController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const result = await getAllUsersService(req);
+
+    if (!result || !result.data.length) {
+      return next(new NotFoundError('No users found'));
+    }
+    successResponse(res, 'Users fetched successfully', result);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function getUserController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const user = await getUserService(req.validatedParams.userId);
+
+    if (!user) {
+      return next(new NotFoundError('No users found'));
+    }
+
+    successResponse(res, 'User fetched successfully', { data: user });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function createUserController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const newUser = await createUserService(req.validatedBody);
+
+    successResponse(res, 'User created successfully', { data: newUser }, 201);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function updateUserController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    // Implementation for updating a user
+    const updatedUser = await updateUserService(
+      req.validatedParams.userId,
+      req.validatedBody
+    );
+
+    successResponse(res, 'User updated successfully', { data: updatedUser });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function deleteUserController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    // Implementation for deleting a user
+    const deletedUser = await deleteUserService(req.validatedParams.userId);
+
+    successResponse(res, 'User deleted successfully', { data: deletedUser });
+  } catch (error) {
+    return next(error);
+  }
+}

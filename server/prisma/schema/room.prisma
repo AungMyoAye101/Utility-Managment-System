@@ -1,0 +1,31 @@
+enum RoomStatus {
+  Available
+  Rented
+  Purchased
+  InMaintenance
+}
+
+model Room {
+  id            String     @id @default(uuid())
+  roomNo        Int        @unique
+  floor         Int
+  dimension     String
+  noOfBedRoom   Int
+  status        RoomStatus @default(Available)
+  sellingPrice  Decimal?
+  maxNoOfPeople Int
+  description   String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  // relations
+  contract        Contract[]
+  tenant          Tenant?
+  customerService CustomerService[]
+  bill            Bill[]
+
+  @@index([roomNo])
+  @@index([status, floor])
+  @@index([status, createdAt])
+  @@map("rooms")
+}
