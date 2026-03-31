@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-
+import img from "@/assets/Facilities.svg"
 type FacilitiesProps = {
   facilities: string[];
 };
@@ -11,7 +11,7 @@ const Facilities = ({ facilities }: FacilitiesProps) => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-lg">
-          <img src="src/assets/Facilities.svg" alt="facilities" />
+          <img src={img} alt="facilities" />
           Facilities
         </CardTitle>
       </CardHeader>

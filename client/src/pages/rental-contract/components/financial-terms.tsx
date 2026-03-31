@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
+import img from "@/assets/financial.svg"
 type FinancialTermsProps = {
   price: string;
   duration: number;
@@ -16,7 +16,7 @@ const FinancialTerms = ({
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <img src="src/assets/financial.svg" alt="financial" />
+          <img src={img} alt="financial" />
           Financial Terms
         </CardTitle>
       </CardHeader>

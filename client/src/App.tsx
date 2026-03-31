@@ -8,7 +8,6 @@ import Overview from "@/pages/overview/overview";
 import ProtectedRoute from "@/components/protected-route";
 import NotFoundPage from "@/pages/not-found";
 import RentalContract from "./pages/rental-contract/rental-contract";
-import { useSelector } from "react-redux";
 const routes = [
   {
     path: "",
@@ -44,8 +43,7 @@ const router = createBrowserRouter(routes);
 
 const App = () => {
 
-  const app = useSelector(state => state)
-  console.log(app)
+
   return <RouterProvider router={router} />;
 };
 

@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/tooltip";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import ContractPDF from "./contract-pdf/contract-pdf";
+import downloadImg from "@/assets/Download.svg"
 
 const RentalContract = () => {
   const tenantId = useSelector((state: RootState) => state.auth.user?.tenantId);
@@ -81,7 +82,7 @@ const RentalContract = () => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button className="text-white text-sm w-full md:w-auto">
-                <img src="src/assets/download.svg" alt="contract" />
+                <img src={downloadImg} alt="contract" />
                 Download PDF
               </Button>
             </TooltipTrigger>

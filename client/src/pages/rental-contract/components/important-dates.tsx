@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
+import img from "@/assets/financial.svg"
 type ImportantDatesProps = {
   startDate: string;
   expiryDate: string;
@@ -15,7 +15,7 @@ const ImportantDates = ({ startDate, expiryDate }: ImportantDatesProps) => {
     <Card className="mb-7">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <img src="src/assets/calendar.svg" alt="calendar" />
+          <img src={img} alt="calendar" />
           Important Dates
         </CardTitle>
       </CardHeader>

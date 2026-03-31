@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Room, Tenant } from "@/types/contract";
-
+import tenantImg from "@/assets/tenant.svg"
 type TenantInformationProp = {
   tenant: Tenant;
   room: Room;
@@ -18,7 +18,7 @@ const TenantInformation = ({
     <Card className="shadow-lg rounded-xl">
       <CardHeader>
         <CardTitle className="flex gap-2 items-center">
-          <img src="src/assets/tenant.svg" alt="contract" />
+          <img src={tenantImg} alt="contract" />
           Tenant Information
         </CardTitle>
       </CardHeader>

@@ -36,7 +36,7 @@ const MonthlyUsageChart = ({
       color: "#2563eb",
     },
   } satisfies ChartConfig;
-   
+
   return (
     <div className="w-full flex-1 min-w-[280px]">
       <Card className="bg-card shadow-sm border border-gray-200 rounded-sm h-full">
@@ -52,7 +52,7 @@ const MonthlyUsageChart = ({
         <CardContent className="pt-2 sm:pt-4">
           <ChartContainer
             config={chartConfig}
-            className="h-[240px] sm:h-[280px] md:h-[320px] w-full"
+            className="h-60 sm:h-[280px] md:h-80 w-full"
           >
             <BarChart accessibilityLayer data={chartData}>
               <CartesianGrid vertical={false} />

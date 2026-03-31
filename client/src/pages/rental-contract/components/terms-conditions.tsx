@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
+import img from "@/assets/Terms and Conditions.svg"
 const TermsandConditions = () => {
   const TermsandConditions = [
     "1. Rent is due on the 5th of each month. Late payments after the 5th will incur a 50,000 MMK late fee.",
@@ -21,7 +21,7 @@ const TermsandConditions = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <img
-            src="src/assets/Terms and Conditions.svg"
+            src={img}
             alt="termsandCondition"
           />
           Terms and Conditions

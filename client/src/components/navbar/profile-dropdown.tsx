@@ -27,7 +27,7 @@ const ProfileDropdown = () => {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-40 space-y-2">
+      <DropdownMenuContent align="end" className="w-40 space-y-2" >
         <DropdownMenuItem asChild>
           <Link to="/profile" className="flex items-center">
             View My Profile <ChevronRight className="w-4 h-4 ml-auto" />

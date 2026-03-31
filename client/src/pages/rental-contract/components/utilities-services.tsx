@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
+import img from "@/assets/Utilities.svg"
 type UtilitiesProps = {
   facilities: string[];
 };
@@ -16,7 +16,7 @@ const UtilitiesServices = ({ facilities }: UtilitiesProps) => {
     <Card className="mb-5">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <img src="src/assets/Utilities.svg" alt="utilities" />
+          <img src={img} alt="utilities" />
           Utilities & Services
         </CardTitle>
         <CardDescription>

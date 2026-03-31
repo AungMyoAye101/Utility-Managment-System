@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-
+import contract from "@/assets/contract.svg"
+import checkInCircle from "@/assets/check_circle.svg"
 type MonthlyContractProp = {
   startDate: string;
   expiryDate: string;
@@ -32,7 +33,7 @@ const MonthlyContract = ({ startDate, expiryDate }: MonthlyContractProp) => {
       <CardHeader>
         <CardTitle className="flex items-center gap-3 mt-2">
           <div className="bg-primary/40 p-2 rounded-lg">
-            <img src="src/assets/contract.svg" alt="contract" />
+            <img src={contract} alt="contract" />
           </div>
           <div className="flex flex-col gap-3">
             <span className="text-muted-foreground text-sm">Contract Type</span>
@@ -64,7 +65,7 @@ const MonthlyContract = ({ startDate, expiryDate }: MonthlyContractProp) => {
               : "bg-destructive hover:bg-destructive/20 text-white"
           )}
         >
-          <img src="src/assets/check_circle.svg" alt="checkCircle" />
+          <img src={checkInCircle} alt="checkCircle" />
           {isActive ? "Active" : "Overdue"}
         </Button>
       </CardContent>
