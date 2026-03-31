@@ -7,7 +7,7 @@ export default defineConfig({
   platform: 'node',
   clean: true,
   outExtension() {
-    return { js: '.cjs' };
+    return { js: '.js' };
   },
   external: ['@prisma/client'],
 });

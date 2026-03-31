@@ -1,6 +1,5 @@
 export const deployedUrls = [
-  'https://node-utility-management-system.onrender.com',
-  'https://node-utility-management-system-fye1.onrender.com',
+  'https://utility-management-system-32o3.onrender.com',
 ];
 
 export const allowedOrigins = [

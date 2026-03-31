@@ -77,10 +77,10 @@ const tables = [
 ] as const;
 
 async function cleanUpDatabase() {
-  // Use transaction for faster cleanup
-  await prisma.$transaction([
-    ...tables.map((table) => (prisma as any)[table].deleteMany()),
-  ]);
+
+  for (const table of tables) {
+    await (prisma as any)[table].deleteMany();
+  }
   console.log('🧹 Database cleaned up successfully.');
 }
 
@@ -113,8 +113,8 @@ async function createRoomsBatch(totalFloors: number, roomsPerFloor: number) {
         sellingPrice:
           status === 'Purchased'
             ? new Prisma.Decimal(
-                faker.number.int({ min: 250000, max: 1500000 })
-              )
+              faker.number.int({ min: 250000, max: 1500000 })
+            )
             : null,
         maxNoOfPeople: faker.number.int({ min: 2, max: 6 }),
         description: faker.helpers.arrayElement([
@@ -192,7 +192,7 @@ async function createTenantsAndUsersBatch(
         tenant.name === 'TenantName'
           ? 'tenant'
           : tenant.name.split(' ')[0].toLowerCase() +
-            faker.number.int({ min: 1, max: 99 }),
+          faker.number.int({ min: 1, max: 99 }),
       email: tenant.email,
       password: tenantPassword,
       role: 'Tenant' as UserRole,
