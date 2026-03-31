@@ -11,13 +11,13 @@ A comprehensive utility management system built with Node.js, TypeScript, and Po
 ## Server Deployment Info
 
 This project is deployed on render. Here you can access the server:
-1. https://node-utility-management-system.onrender.com/
-2. https://node-utility-management-system-fye1.onrender.com/
+```
+ https://utility-management-system-32o3.onrender.com
+```
 
 ### Swagger Docs for endpoints
 ```
-1. https://node-utility-management-system.onrender.com/docs/
-2. https://node-utility-management-system-fye1.onrender.com/docs/
+https://utility-management-system-32o3.onrender.com/docs/
 ```
 
 ## Features

@@ -62,7 +62,7 @@ A React + TypeScript single-page application (SPA) built with Vite for managing 
 Optional environment variables (create a .env file at the project root):
 - API_BASE_URL: Base URL for the backend API
   - Defaults to http://localhost:3000/api/v1/
-  - Example: `API_BASE_URL="https://api.example.com/v1"`
+  - Example: `API_BASE_URL="https://utility-management-system-32o3.onrender.com"`
 
 Note: Vite only exposes environment variables to the client if they are prefixed with VITE_. This project reads `import.meta.env.API_BASE_URL` directly in the axios client. Ensure your environment supports this or update the client code to read `import.meta.env.VITE_API_BASE_URL` if you prefer the conventional Vite approach.
 
