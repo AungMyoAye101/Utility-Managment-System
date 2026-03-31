@@ -14,22 +14,23 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProfileTab from "./profile-tab";
 import SecurityTab from "./security-tab";
 import LogoutAlert from "@/components/navbar/logout-alert";
+import type { Tenant } from "@/types/profile";
 
 const Profile = () => {
   const navigate = useNavigate();
-
+  console.log("profile")
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
+  useEffect(() => {
+    if (!isAuthenticated) navigate("/login");
+  }, [isAuthenticated, navigate]);
   const tenantId = useSelector(
     (state: RootState) => state.auth.user?.tenantId!
   );
 
-  const { tenant, isLoading } = useTenantQuery(tenantId);
+  const { data, isLoading } = useTenantQuery(tenantId);
 
-  useEffect(() => {
-    if (!isAuthenticated) navigate("/login");
-  }, [isAuthenticated, navigate]);
 
   if (isLoading) {
     return (
@@ -44,7 +45,7 @@ const Profile = () => {
     );
   }
 
-  if (!tenant) {
+  if (!data) {
     return (
       <div className="h-full w-full flex items-center justify-center">
         <h2 className="text-2xl font-bold text-primary">
@@ -54,6 +55,20 @@ const Profile = () => {
     );
   }
 
+
+  const tenant: Tenant = {
+    id: data.id,
+    name: data?.name,
+    email: data?.email,
+    phNumber: data?.phNumber,
+    roomNo: data?.roomNo,
+    roomId: data?.roomId,
+    emergencyNo: data.emergencyNo,
+    nrc: data?.nrc,
+    user: data?.user
+  }
+
+  console.log(tenant)
   return (
     <div>
       <Card className="mb-6">
@@ -66,7 +81,7 @@ const Profile = () => {
               </AvatarFallback>
             </Avatar>
             <CardTitle>
-              <h1 className="text-h3">{tenant?.name}</h1>
+              <h1 className="text-h3">{tenant.name}</h1>
               <h3 className="text-h4 text-[#4F4F4F] mb-2">T-0001</h3>
               <Badge className="bg-secondary py-2 px-4">Active</Badge>
             </CardTitle>

@@ -5,13 +5,13 @@ import type { UpdatePasswordPayload, updateProfilePayload } from "@/types/profil
 
 
 export const getTenantService = async (tenant_id: string) => {
-  const response = await apiClient.get<ApiResponse<Tenant>>(`/tenants/${tenant_id}`);
+  const response = await apiClient.get<ApiResponse<{ data: Tenant }>>(`/tenants/${tenant_id}`);
 
   if (!response.data.success) {
     throw new Error(response.data.message || "Fetch tenant failed");
   }
-  
-  return response.data;
+
+  return response.data.content.data;
 }
 
 export const updateProfileService = async (payload: updateProfilePayload) => {
@@ -21,7 +21,7 @@ export const updateProfileService = async (payload: updateProfilePayload) => {
     throw new Error(response.data.message || "Update profile failed");
   }
 
-  return response.data;    
+  return response.data;
 }
 
 export const updatePasswordService = async (payload: UpdatePasswordPayload) => {

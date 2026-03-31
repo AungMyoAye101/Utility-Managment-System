@@ -13,7 +13,7 @@ const CustomerService = () => {
   const tenantId = useSelector((state: RootState) => state.auth.user?.tenantId);
   //Get room id 
   const { data: roomId } = useServiceRoom(tenantId!)
-  console.log(roomId, "room");
+
 
   return (
     <section className="mt-10 text-text-primary space-y-5 px-4">

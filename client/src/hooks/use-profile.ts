@@ -11,43 +11,44 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export const useTenantQuery = (tenant_id: string) => {
-	const tenantQuery = useQuery({
+	return useQuery({
 		queryKey: ["tenant", tenant_id],
 		queryFn: () => getTenantService(tenant_id),
 		enabled: !!tenant_id,
 	});
+	// console.log(tenantQuery)
 
-	if (!tenantQuery.data) {
-		return {
-			tenant: null,
-			isLoading: true,
-			isError: false,
-			error: null,
-		};
-	}
+	// if (!tenantQuery.data) {
+	// 	return {
+	// 		tenant: null,
+	// 		isLoading: true,
+	// 		isError: false,
+	// 		error: null,
+	// 	};
+	// }
 
-	const tenantData = {
-		id: tenantQuery.data.content.id,
-		name: tenantQuery.data.content.name,
-		email: tenantQuery.data.content.email,
-		phNumber: tenantQuery.data.content.phNumber,
-		emergencyNo: tenantQuery.data.content.emergencyNo,
-		nrc: tenantQuery.data.content.nrc,
-		roomId: tenantQuery.data.content.roomId,
-		user: {
-			role: tenantQuery.data.content.user?.role,
-			isActive: tenantQuery.data.content.user?.isActive,
-			createdAt: tenantQuery.data.content.user?.createdAt,
-			updatedAt: tenantQuery.data.content.user?.updatedAt,
-		}
-	};
+	// const tenantData = {
+	// 	id: tenantQuery.data.content.id,
+	// 	name: tenantQuery.data.content.name,
+	// 	email: tenantQuery.data.content.email,
+	// 	phNumber: tenantQuery.data.content.phNumber,
+	// 	emergencyNo: tenantQuery.data.content.emergencyNo,
+	// 	nrc: tenantQuery.data.content.nrc,
+	// 	roomId: tenantQuery.data.content.roomId,
+	// 	user: {
+	// 		role: tenantQuery.data.content.user?.role,
+	// 		isActive: tenantQuery.data.content.user?.isActive,
+	// 		createdAt: tenantQuery.data.content.user?.createdAt,
+	// 		updatedAt: tenantQuery.data.content.user?.updatedAt,
+	// 	}
+	// };
 
-	return {
-		tenant: tenantData,
-		isLoading: tenantQuery.isLoading,
-		isError: tenantQuery.isError,
-		error: tenantQuery.error ?? null,
-	};
+	// return {
+	// 	tenant: tenantData,
+	// 	isLoading: tenantQuery.isLoading,
+	// 	isError: tenantQuery.isError,
+	// 	error: tenantQuery.error ?? null,
+	// };
 };
 
 export const useUpdateProfileQuery = (tenant_id: string) => {
@@ -63,7 +64,7 @@ export const useUpdateProfileQuery = (tenant_id: string) => {
 		onError: (error: Error) => {
 			toast.error(
 				error.message ||
-					"Something went wrong with profile udpate. Try again."
+				"Something went wrong with profile udpate. Try again."
 			);
 		},
 	});
@@ -83,7 +84,7 @@ export const useUpdatePasswordQuery = (tenantId: string) => {
 		onError: (error: Error) => {
 			toast.error(
 				error.message ||
-					"Something went wrong with password udpate. Try again."
+				"Something went wrong with password udpate. Try again."
 			);
 		},
 	});
