@@ -3,7 +3,6 @@ import { Contact, Pencil, UserCog } from "lucide-react"
 import { useState } from "react"
 import { useForm } from "react-hook-form";
 import * as z from "zod"
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,12 +11,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { Tenant } from "@/types/profile";
 import { useUpdateProfileQuery } from "@/hooks/use-profile";
 import { toast } from "sonner";
-import { useFetchRoomQuery } from "@/hooks/use-room";
+
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Full name is required." }).min(5, { message: "Full name must be at least 5 characters long." }),
   email: z.email().min(1, { message: "Email is required." }),
-  phNumber: z.string().min(1, { message: "Phone number is required." }),
+  phoneNo: z.string().min(1, { message: "Phone number is required." }),
   emergencyNo: z.string().min(1, { message: "Emergency number is required." }),
   roomNo: z.number().min(1, { message: "Room ID is required." }),
   nrc: z.string().min(1, { message: "NRC is required." }),
@@ -25,21 +24,20 @@ const formSchema = z.object({
 
 const ProfileTab = ({ profile }: { profile: Tenant }) => {
   const { mutate: updateProfile, isPending } = useUpdateProfileQuery(profile.id);
-  const { room, isLoading } = useFetchRoomQuery(profile.id);
-  const roomNo = room?.roomNo;
+
 
   const [editMode, setEditMode] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-    name: profile.name,
-    email: profile.email,
-    phNumber: profile.phNumber,
-    emergencyNo: profile.emergencyNo,
-    roomNo,
-    nrc: profile.nrc
-  },
+      name: profile.name,
+      email: profile.email,
+      phoneNo: profile.phoneNo,
+      emergencyNo: profile.emergencyNo,
+      roomNo: profile.roomNo,
+      nrc: profile.nrc
+    },
   })
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
@@ -134,7 +132,7 @@ const ProfileTab = ({ profile }: { profile: Tenant }) => {
 
             <FormField
               control={form.control}
-              name="phNumber"
+              name="phoneNo"
               render={({ field }) => (
                 <FormItem className="">
                   <FormLabel className="text-[20px] text-gray-700 mb-1">Phone Number</FormLabel>
@@ -159,7 +157,7 @@ const ProfileTab = ({ profile }: { profile: Tenant }) => {
 
             <div>
               <Label htmlFor="roomNo" className="text-[20px] text-gray-700 mb-1">Room No</Label>
-              <Input type="text" disabled placeholder={isLoading ? "Loading..." : String(roomNo) || "N/A"} className="shadow border-foreground/40 py-6 text-slate-500" />
+              <Input type="text" disabled placeholder={String(profile.roomNo) || "N/A"} className="shadow border-foreground/40 py-6 text-slate-500" />
             </div>
           </div>
 

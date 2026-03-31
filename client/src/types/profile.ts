@@ -2,7 +2,7 @@ export interface Tenant {
 	id: string;
 	name: string;
 	email: string;
-	phNumber: string;
+	phoneNo: string;
 	emergencyNo: string;
 	roomId: string;
 	roomNo?: number;

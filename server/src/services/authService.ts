@@ -104,6 +104,11 @@ export async function refreshTokenService(refreshToken: string) {
   return {
     newAccessToken,
     newRefreshToken,
+    user: {
+      id: user.id,
+      name: user.email,
+      role: user.role
+    }
   };
 }
 

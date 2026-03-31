@@ -15,6 +15,7 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/store/store";
+import { Loader2Icon } from "lucide-react";
 
 const Login = () => {
   // const { mutate: login } = useLogin();
@@ -95,8 +96,14 @@ const Login = () => {
                   type="submit"
                   className="w-full bg-primary text-white hover:bg-primary/90"
                   disabled={isPending}
+
                 >
-                  Login
+                  {
+                    isPending ?
+                      <Loader2Icon className="animate-spin" />
+                      : "Login"
+                  }
+
                 </Button>
               </form>
             </Form>

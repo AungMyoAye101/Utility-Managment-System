@@ -18,7 +18,7 @@ import type { Tenant } from "@/types/profile";
 
 const Profile = () => {
   const navigate = useNavigate();
-  console.log("profile")
+
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
@@ -60,15 +60,20 @@ const Profile = () => {
     id: data.id,
     name: data?.name,
     email: data?.email,
-    phNumber: data?.phNumber,
-    roomNo: data?.roomNo,
+    phoneNo: data?.phoneNo,
     roomId: data?.roomId,
+    roomNo: data?.room?.roomNo,
     emergencyNo: data.emergencyNo,
     nrc: data?.nrc,
-    user: data?.user
+    user: {
+      role: "Tenant",
+      isActive: true,
+      createdAt: data?.createdAt,
+      updatedAt: data?.createdAt,
+    }
   }
 
-  console.log(tenant)
+  console.log(tenant, "app")
   return (
     <div>
       <Card className="mb-6">

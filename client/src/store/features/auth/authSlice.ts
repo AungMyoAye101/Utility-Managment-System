@@ -3,20 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface AuthStateType {
   user: AuthUser | null;
-  accessToken: string;
+  accessToken: string | null;
   isAuthenticated: boolean;
+  isLoading: boolean;
 }
 
-function hasAccessToken(): boolean {
-  const token = localStorage.getItem("accessToken");
-
-  return token !== null && token !== "undefined" && token.trim() !== "";
-}
 
 const initialState: AuthStateType = {
-  user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")!) : null,
-  accessToken: localStorage.getItem("accessToken") || "",
-  isAuthenticated: hasAccessToken(),
+  user: null,
+  accessToken: null,
+  isAuthenticated: false,
+  isLoading: true
 };
 
 export const authSlice = createSlice({
@@ -27,21 +24,27 @@ export const authSlice = createSlice({
       state.user = action.payload.user;
       state.accessToken = action.payload.accessToken;
       state.isAuthenticated = true;
-
-      localStorage.setItem("accessToken", action.payload.token);
-      localStorage.setItem("user", JSON.stringify(action.payload.user));
+      state.isLoading = false;
     },
     logout: (state) => {
       state.user = null;
-      state.accessToken = "";
+      state.accessToken = null;
       state.isAuthenticated = false;
+      state.isLoading = false;
+    },
 
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("user");
+    setSession: (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      state.user = action.payload.user ?? null;
+      state.isAuthenticated = true;
+      state.isLoading = false;
+    },
+    setLoading: (state, action) => {
+      state.isLoading = action.payload;
     },
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, setLoading, setSession } = authSlice.actions;
 
 export default authSlice.reducer;

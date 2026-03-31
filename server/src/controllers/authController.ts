@@ -59,7 +59,7 @@ export async function refreshTokenController(
       return next(new UnauthorizedError('Refresh token is required'));
     }
 
-    const { newAccessToken, newRefreshToken } =
+    const { newAccessToken, newRefreshToken, user } =
       await refreshTokenService(refreshToken);
 
     if (!newAccessToken || !newRefreshToken) {
@@ -74,6 +74,7 @@ export async function refreshTokenController(
       'Token refreshed successfully',
       {
         accessToken: newAccessToken,
+        user
       },
       200
     );

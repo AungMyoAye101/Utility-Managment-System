@@ -7,6 +7,8 @@ import { Toaster } from "sonner";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ErrorBoundary from "@/components/error-boundary.tsx";
+import AppInitializer from "./components/app-intializer.tsx";
+
 
 const queryClinet = new QueryClient()
 
@@ -16,7 +18,9 @@ createRoot(document.getElementById("root")!).render(
       <Provider store={store}>
         <Toaster richColors />
         <ErrorBoundary>
-          <App />
+          <AppInitializer>
+            <App />
+          </AppInitializer>
         </ErrorBoundary>
       </Provider>
     </QueryClientProvider>

@@ -5,7 +5,7 @@ import type { UpdatePasswordPayload, updateProfilePayload } from "@/types/profil
 
 
 export const getTenantService = async (tenant_id: string) => {
-  const response = await apiClient.get<ApiResponse<{ data: Tenant }>>(`/tenants/${tenant_id}`);
+  const response = await apiClient.get<ApiResponse<any>>(`/tenants/${tenant_id}`);
 
   if (!response.data.success) {
     throw new Error(response.data.message || "Fetch tenant failed");

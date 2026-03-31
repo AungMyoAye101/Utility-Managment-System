@@ -2,6 +2,7 @@ import { logout } from "@/store/features/auth/authSlice";
 import store from "@/store/store";
 import axios from "axios";
 
+
 const BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
   "https://utility-management-system-32o3.onrender.com/api/v1";
@@ -81,7 +82,8 @@ apiClient.interceptors.response.use(
         apiClient
           .post(`${BASE_URL}/auth/refresh-token`, {}, { withCredentials: true })
           .then(({ data }) => {
-            ACCESS_TOKEN = data.accessToken;
+            ACCESS_TOKEN = data?.content?.accessToken ?? null;
+            if (!ACCESS_TOKEN) throw new Error("Refresh token response missing accessToken");
             apiClient.defaults.headers.common["Authorization"] =
               "Bearer " + ACCESS_TOKEN;
             originalRequest.headers["Authorization"] = "Bearer " + ACCESS_TOKEN;
@@ -107,12 +109,14 @@ apiClient.interceptors.response.use(
 export const silentRefresh = async () => {
   try {
     const { data } = await apiClient.post("/auth/refresh-token", {}, { withCredentials: true });
-    ACCESS_TOKEN = data.accessToken;
+    ACCESS_TOKEN = data?.content?.accessToken ?? null;
     console.log(ACCESS_TOKEN, "token")
   } catch (error) {
     console.error("Could not silently refresh token:", error);
     ACCESS_TOKEN = null;
+
   }
 };
+
 
 export default apiClient;
