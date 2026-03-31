@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.cjs",
   "scripts": {
-    "build": "prisma generate && tsup",
+    "build": "tsup",
     "start": "node dist/index.cjs",
     "dev": "tsx watch --env-file=.env ./src/index.ts",
     "db:push": "prisma db push",
